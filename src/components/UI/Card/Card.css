@@ -2,3 +2,7 @@
   display: inline-block;
   margin: 20px;
 }
+
+h2.MuiTypography-root.MuiTypography-h5.MuiTypography-gutterBottom {
+  text-transform: capitalize;
+}

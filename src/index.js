@@ -1,19 +1,25 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import reducer from './store/reducers/reducers';
+import menuReducer from './store/reducers/menuReducer';
+import cartReducer from './store/reducers/cartReducer';
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const reducers = combineReducers({
+  menu: menuReducer,
+  cart: cartReducer
+})
+
 const store = createStore(
-  reducer,
+  reducers,
   composeEnhancers(applyMiddleware(thunk))
 );
 

@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ImgMediaCard() {
+const ImgMediaCard = (props) => {
   const classes = useStyles();
 
   return (
@@ -25,15 +25,15 @@ export default function ImgMediaCard() {
           component="img"
           alt="Korean Food"
           height="140"
-          image="https://cdn.pixabay.com/photo/2017/08/08/09/44/food-photography-2610863_960_720.jpg"
+          image={props.image}
           title="Korean Dish"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Bibimpab - 2500 KZT
+            {props.name} - {props.price} KZT
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Bibimbap simply translates to “mixed rice with meat and assorted vegetables“. 
+            {props.description} 
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -45,3 +45,5 @@ export default function ImgMediaCard() {
     </Card>
   );
 }
+
+export default ImgMediaCard;
