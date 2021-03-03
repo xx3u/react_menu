@@ -1,4 +1,5 @@
 import { CART_FAILURE, CART_LOADING, CART_SUCCESS } from "../actionTypes";
+import { ADD_TO_CART } from './../actionTypes';
 
 const initialState = {
   cartItems: {
@@ -23,6 +24,15 @@ const cartReducer = (state = initialState, action) => {
         return item;
       })
       return {...state, cartItems: items, loading: false};
+    case ADD_TO_CART:
+      return {
+        ...state, 
+        cartItems: {
+          ...state.cartItems,
+          [action.item]: state.cartItems[action.item] + 1
+        },
+        order: true
+      };
     default:
     return state;
   }

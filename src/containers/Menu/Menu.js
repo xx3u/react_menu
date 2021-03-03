@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveData } from '../../store/actions/menuActions';
-import { getCartItem } from './../../store/actions/cartActions';
+import { addToCart, getCartItem } from './../../store/actions/cartActions';
 import './Menu.css';
 import ImgMediaCard from "../../components/UI/Card/Card";
 import InsetList from './../../components/UI/List/List'
@@ -22,6 +22,10 @@ const Menu = () => {
     dispatch(getCartItem());
   }, [dispatch])
 
+  const handleChange = e => {
+    dispatch(addToCart(e))
+  }
+
   return (
     <>
       <div className="Menu">
@@ -33,6 +37,7 @@ const Menu = () => {
               image={dish.image}
               name={dish.name}
               price={dish.price}
+              click={() => handleChange(dish.name)}
             />
           })
         }

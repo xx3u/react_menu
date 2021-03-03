@@ -5,3 +5,5 @@ export const GET_SUCCESS = 'GET_SUCCESS';
 export const CART_LOADING = 'CART_LOADING';
 export const CART_SUCCESS = 'CART_SUCCESS';
 export const CART_FAILURE = 'CART_FAILURE';
+
+export const ADD_TO_CART = 'ADD_TO_CART';
