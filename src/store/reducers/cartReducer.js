@@ -1,4 +1,4 @@
-import { CART_FAILURE, CART_LOADING, CART_SUCCESS } from "../actionTypes";
+import { CART_FAILURE, CART_LOADING, CART_SUCCESS, REMOVE_FROM_CART } from "../actionTypes";
 import { ADD_TO_CART } from './../actionTypes';
 
 const initialState = {
@@ -34,6 +34,15 @@ const cartReducer = (state = initialState, action) => {
         order: true,
         totalPrice: state.totalPrice + action.price
       };
+    case REMOVE_FROM_CART:
+      return {
+        ...state, 
+        cartItems: {
+          ...state.cartItems,
+          [action.name]: 0
+        },
+        totalPrice: state.totalPrice - action.price * action.quantity
+      }
     default:
     return state;
   }

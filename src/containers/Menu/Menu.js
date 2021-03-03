@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveData } from '../../store/actions/menuActions';
-import { addToCart, getCartItem } from './../../store/actions/cartActions';
+import { addToCart, getCartItem, removeFromCart } from './../../store/actions/cartActions';
 import './Menu.css';
 import ImgMediaCard from "../../components/UI/Card/Card";
 import InsetList from './../../components/UI/List/List'
@@ -23,9 +23,17 @@ const Menu = () => {
     dispatch(getCartItem());
   }, [dispatch])
 
-  const handleChange = (name, price) => {
+  const addItem = (id, name, price) => {
+    let elem = document.getElementById(id);
+    elem.style.display = 'block';
     dispatch(addToCart(name, price))
-  }
+  };
+
+  const removeItem = (id, price, quantity, name) => {
+    let elem = document.getElementById(id);
+    elem.style.display = 'none';
+    dispatch(removeFromCart(price, quantity, name))
+  };
 
   return (
     <>
@@ -33,12 +41,12 @@ const Menu = () => {
         <h1 className="menuTitle">Menu</h1>
         {
           dishes.map((dish) => {
-            return <ImgMediaCard
+            return <ImgMediaCard 
               key={dish.id}
               image={dish.image}
               name={dish.name}
               price={dish.price}
-              click={() => handleChange(dish.name, dish.price)}
+              click={() => addItem(dish.id, dish.name, dish.price)}
             />
           })
         }
@@ -53,6 +61,8 @@ const Menu = () => {
               name={dish.name}
               quantity={cartItems[dish.name]}
               price={dish.price * cartItems[dish.name]}
+              delete={() => removeItem(dish.id, dish.price, cartItems[dish.name], dish.name)}
+              id={dish.id}
             />
           })
         }

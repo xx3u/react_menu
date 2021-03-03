@@ -1,4 +1,4 @@
-import { CART_FAILURE, CART_LOADING,CART_SUCCESS } from "../actionTypes";
+import { CART_FAILURE, CART_LOADING, CART_SUCCESS, REMOVE_FROM_CART} from "../actionTypes";
 import db from './../../api';
 import { ADD_TO_CART } from './../actionTypes';
 
@@ -21,3 +21,7 @@ export const getCartItem = () => {
 export const addToCart = (item, price) => {
   return {type: ADD_TO_CART, item, price}
 };
+
+export const removeFromCart = (price, quantity, name) => {
+  return {type: REMOVE_FROM_CART, price, quantity, name}
+}

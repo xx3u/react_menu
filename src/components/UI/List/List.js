@@ -23,7 +23,7 @@ export default function InsetList(props) {
   const classes = useStyles();
 
   return (
-    <List component="nav" className={classes.root} aria-label="contacts">
+    <List component="nav" className={classes.root} id={props.id} aria-label="contacts">
       <ListItem>
         <ListItemAvatar>
           <Avatar>
@@ -38,7 +38,7 @@ export default function InsetList(props) {
           primary={props.price + " KZT"}
         />
         <ListItemSecondaryAction>
-          <IconButton edge="end" aria-label="delete">
+          <IconButton edge="end" aria-label="delete" onClick={props.delete}>
             <DeleteIcon />
           </IconButton>
         </ListItemSecondaryAction>

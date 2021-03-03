@@ -1,5 +1,4 @@
-import { ON_ERROR, ON_LOADING } from "../actionTypes";
-import { GET_SUCCESS } from '../actionTypes';
+import { ON_ERROR, ON_LOADING, GET_SUCCESS } from "../actionTypes";
 import db from '../../api';
 
 
