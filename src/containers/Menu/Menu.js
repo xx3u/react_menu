@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveData } from '../../store/actions/menuActions';
-import { addToCart, getCartItem, removeFromCart } from './../../store/actions/cartActions';
+import { addToCart, checkNoOrders, getCartItem, removeFromCart } from './../../store/actions/cartActions';
 import './Menu.css';
 import ImgMediaCard from "../../components/UI/Card/Card";
 import InsetList from './../../components/UI/List/List'
@@ -26,13 +26,14 @@ const Menu = () => {
   const addItem = (id, name, price) => {
     let elem = document.getElementById(id);
     elem.style.display = 'block';
-    dispatch(addToCart(name, price))
+    dispatch(addToCart(name, price));
   };
 
   const removeItem = (id, price, quantity, name) => {
     let elem = document.getElementById(id);
     elem.style.display = 'none';
-    dispatch(removeFromCart(price, quantity, name))
+    dispatch(removeFromCart(price, quantity, name));
+    dispatch(checkNoOrders());
   };
 
   return (

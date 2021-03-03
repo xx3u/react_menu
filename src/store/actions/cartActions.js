@@ -1,6 +1,6 @@
 import { CART_FAILURE, CART_LOADING, CART_SUCCESS, REMOVE_FROM_CART} from "../actionTypes";
 import db from './../../api';
-import { ADD_TO_CART } from './../actionTypes';
+import { ADD_TO_CART, NO_ORDERS } from './../actionTypes';
 
 const cartRequest = () => ({type: CART_LOADING});
 const cartSuccess = items => ({type: CART_SUCCESS, items});
@@ -25,3 +25,5 @@ export const addToCart = (item, price) => {
 export const removeFromCart = (price, quantity, name) => {
   return {type: REMOVE_FROM_CART, price, quantity, name}
 }
+
+export const checkNoOrders = () => ({type: NO_ORDERS})

@@ -1,5 +1,4 @@
-import { CART_FAILURE, CART_LOADING, CART_SUCCESS, REMOVE_FROM_CART } from "../actionTypes";
-import { ADD_TO_CART } from './../actionTypes';
+import { CART_FAILURE, CART_LOADING, CART_SUCCESS, ADD_TO_CART, REMOVE_FROM_CART, NO_ORDERS } from "../actionTypes";
 
 const initialState = {
   cartItems: {
@@ -42,6 +41,14 @@ const cartReducer = (state = initialState, action) => {
           [action.name]: 0
         },
         totalPrice: state.totalPrice - action.price * action.quantity
+      };
+    case NO_ORDERS:
+      const values = {...state.cartItems};
+      let sum = Object.keys(values).reduce((sum, key) => sum + parseFloat(values[key] || 0), 0);
+      if (sum === 0) {
+        return {...state, order: false}
+      } else {
+        return {...state, order: true}
       }
     default:
     return state;
