@@ -1,0 +1,14 @@
+.Menu {
+  float: left;
+  width: 65%;
+  margin: 5px 20px;
+}
+.menuTitle {
+  text-align: center;
+}
+
+.Cart {
+  float: right;
+  text-align: center;
+  width: 30%;
+}
