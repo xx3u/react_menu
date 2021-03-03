@@ -1,0 +1,9 @@
+nav.MuiList-root.MuiList-padding {
+  background-color: #FFFBF0;
+  margin-bottom: 10px;
+}
+
+span.MuiTypography-root.MuiListItemText-primary.MuiTypography-body1.MuiTypography-displayBlock {
+  text-transform: capitalize;
+}
+

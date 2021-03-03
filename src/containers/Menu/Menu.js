@@ -1,16 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { retrieveData } from '../../store/actions/menuActions';
+import { getCartItem } from './../../store/actions/cartActions';
 import './Menu.css';
 import ImgMediaCard from "../../components/UI/Card/Card";
-import { retrieveData } from './../../store/actions/actions';
+import InsetList from './../../components/UI/List/List'
+import Button from '@material-ui/core/Button';
 
 
 const Menu = () => {
   const dishes = useSelector(state => state.menu.dishes);
+  const cartItems = useSelector(state => state.cart.cartItems);
+  const order = useSelector(state => state.cart.order);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(retrieveData());
+  }, [dispatch])
+
+  useEffect(() => {
+    dispatch(getCartItem());
   }, [dispatch])
 
   return (
@@ -29,7 +38,21 @@ const Menu = () => {
         }
       </div>
       <div className="Cart">
-        <h2>Cart</h2>
+        <h2 className="cartTitle">Cart</h2>
+        {
+          dishes.map((dish) => {
+            return <InsetList 
+              key={dish.id}
+              image={dish.image}
+              name={dish.name}
+              quantity={cartItems[dish.name]}
+              price={dish.price * cartItems[dish.name]}
+            />
+          })
+        }
+        <Button variant="outlined" size="medium" color="primary" disabled={ order ? false: true}>
+          Place Order
+        </Button>
       </div>
     </>
   )

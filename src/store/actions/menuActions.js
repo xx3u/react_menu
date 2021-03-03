@@ -1,6 +1,6 @@
 import { ON_ERROR, ON_LOADING } from "../actionTypes";
-import { GET_SUCCESS } from './../actionTypes';
-import db from './../../api';
+import { GET_SUCCESS } from '../actionTypes';
+import db from '../../api';
 
 
 const loadingRequest = () => ({type: ON_LOADING});
