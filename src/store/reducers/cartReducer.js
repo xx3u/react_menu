@@ -9,7 +9,7 @@ const initialState = {
   loading: false,
   error: null,
   order: false
-}
+};
 
 const cartReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -31,7 +31,8 @@ const cartReducer = (state = initialState, action) => {
           ...state.cartItems,
           [action.item]: state.cartItems[action.item] + 1
         },
-        order: true
+        order: true,
+        totalPrice: state.totalPrice + action.price
       };
     default:
     return state;

@@ -12,6 +12,7 @@ const Menu = () => {
   const dishes = useSelector(state => state.menu.dishes);
   const cartItems = useSelector(state => state.cart.cartItems);
   const order = useSelector(state => state.cart.order);
+  const totalPrice = useSelector(state => state.cart.totalPrice);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -22,8 +23,8 @@ const Menu = () => {
     dispatch(getCartItem());
   }, [dispatch])
 
-  const handleChange = e => {
-    dispatch(addToCart(e))
+  const handleChange = (name, price) => {
+    dispatch(addToCart(name, price))
   }
 
   return (
@@ -37,7 +38,7 @@ const Menu = () => {
               image={dish.image}
               name={dish.name}
               price={dish.price}
-              click={() => handleChange(dish.name)}
+              click={() => handleChange(dish.name, dish.price)}
             />
           })
         }
@@ -55,6 +56,8 @@ const Menu = () => {
             />
           })
         }
+        <h3>Delivery: 500 KZT</h3>
+        <h3>Total Price: {totalPrice} KZT</h3>
         <Button variant="outlined" size="medium" color="primary" disabled={ order ? false: true}>
           Place Order
         </Button>

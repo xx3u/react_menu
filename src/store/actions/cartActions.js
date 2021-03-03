@@ -18,6 +18,6 @@ export const getCartItem = () => {
   }
 };
 
-export const addToCart = (item) => {
-  return {type: ADD_TO_CART, item}
+export const addToCart = (item, price) => {
+  return {type: ADD_TO_CART, item, price}
 };
