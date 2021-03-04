@@ -5,16 +5,12 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
-import './Modal.css'
+import './Modal.css';
 
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
 
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -45,17 +41,17 @@ export default function SimpleModal(props) {
       <form>
         <FormControl>
           <InputLabel htmlFor="address">Address</InputLabel>
-          <Input id="address" />
+          <Input id="address" onChange={props.onchange} value={props.address}/>
         </FormControl>
         <FormControl>
           <InputLabel htmlFor="name">Name</InputLabel>
-          <Input id="name" />
+          <Input id="name" onChange={props.onchange} value={props.name}/>
         </FormControl>
         <FormControl>
           <InputLabel htmlFor="telephone">Telephone</InputLabel>
-          <Input id="telephone" />
+          <Input id="telephone" onChange={props.onchange} value={props.telephone}/>
         </FormControl>
-        <Button variant="outlined" size="medium" color="primary" className="createOrder">
+        <Button variant="outlined" size="medium" color="primary" className="createOrder" onClick={props.createOrder}>
           Create Order
         </Button>
       </form>

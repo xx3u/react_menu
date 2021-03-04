@@ -10,7 +10,7 @@ export const retrieveData = () => {
   return async dispatch => {
     dispatch(loadingRequest());
     try {
-      const response = await db.get('.json');
+      const response = await db.get('dishes.json');
       dispatch(getSuccess(response.data));
     } catch (error) {
       dispatch(errorRequest(error))

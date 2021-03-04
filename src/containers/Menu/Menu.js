@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveData } from '../../store/actions/menuActions';
-import { addToCart, checkNoOrders, getCartItem, removeFromCart } from './../../store/actions/cartActions';
+import { addToCart, checkNoOrders, getCartItem, removeFromCart, postOrder } from './../../store/actions/cartActions';
 import './Menu.css';
 import ImgMediaCard from "../../components/UI/Card/Card";
 import InsetList from './../../components/UI/List/List'
 import Button from '@material-ui/core/Button';
 import SimpleModal from './../../components/UI/Modal/Modal';
+import { useHistory } from "react-router-dom";
 
 
 const Menu = () => {
@@ -15,6 +16,7 @@ const Menu = () => {
   const order = useSelector(state => state.cart.order);
   const totalPrice = useSelector(state => state.cart.totalPrice);
   const dispatch = useDispatch();
+  let history = useHistory();
 
   useEffect(() => {
     dispatch(retrieveData());
@@ -38,6 +40,11 @@ const Menu = () => {
   };
 
   const [open, setOpen] = useState(false);
+  const [input, setInput] = useState({
+    address: '',
+    name: '',
+    telephone: ''
+  })
 
   const handleOpen = () => {
       setOpen(true);
@@ -45,6 +52,18 @@ const Menu = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleChange = (e) => {
+    const inputCopy = {...input};
+    inputCopy[e.target.id] = e.target.value;
+    setInput(inputCopy);
+  };
+
+  const createOrder = (input, cartItems) => {
+    dispatch(postOrder(input, cartItems));
+    setOpen(false);
+    history.push('/');
+  }
 
   return (
     <>
@@ -87,6 +106,11 @@ const Menu = () => {
         <SimpleModal 
           open={open}
           onclose={handleClose}
+          onchange={(e) => handleChange (e)}
+          address={input.address}
+          name={input.name}
+          telephone={input.telephone}
+          createOrder={() => createOrder(input, cartItems)}
         />
       </div>
     </>

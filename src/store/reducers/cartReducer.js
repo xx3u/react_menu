@@ -1,4 +1,4 @@
-import { CART_FAILURE, CART_LOADING, CART_SUCCESS, ADD_TO_CART, REMOVE_FROM_CART, NO_ORDERS } from "../actionTypes";
+import { CART_FAILURE, CART_LOADING, CART_SUCCESS, ADD_TO_CART, REMOVE_FROM_CART, NO_ORDERS, POST_DETAILS } from "../actionTypes";
 
 const initialState = {
   cartItems: {
@@ -7,7 +7,8 @@ const initialState = {
   totalPrice: 500,
   loading: false,
   error: null,
-  order: false
+  order: false,
+  orderDetails: {}
 };
 
 const cartReducer = (state = initialState, action) => {
@@ -50,8 +51,9 @@ const cartReducer = (state = initialState, action) => {
       } else {
         return {...state, order: true}
       }
-    default:
-    return state;
+    case POST_DETAILS:
+      return {...state, orderDetails: action.details};
+    default: return state;
   }
 }
 
