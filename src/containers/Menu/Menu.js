@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { retrieveData } from '../../store/actions/menuActions';
 import { addToCart, checkNoOrders, getCartItem, removeFromCart } from './../../store/actions/cartActions';
@@ -6,6 +6,7 @@ import './Menu.css';
 import ImgMediaCard from "../../components/UI/Card/Card";
 import InsetList from './../../components/UI/List/List'
 import Button from '@material-ui/core/Button';
+import SimpleModal from './../../components/UI/Modal/Modal';
 
 
 const Menu = () => {
@@ -34,6 +35,15 @@ const Menu = () => {
     elem.style.display = 'none';
     dispatch(removeFromCart(price, quantity, name));
     dispatch(checkNoOrders());
+  };
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+      setOpen(true);
+    };  
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -69,9 +79,15 @@ const Menu = () => {
         }
         <h3>Delivery: 500 KZT</h3>
         <h3>Total Price: {totalPrice} KZT</h3>
-        <Button variant="outlined" size="medium" color="primary" disabled={ order ? false: true}>
+        <Button variant="outlined" size="medium" color="primary" disabled={ order ? false: true} onClick={handleOpen}>
           Place Order
         </Button>
+      </div>
+      <div className="Modal">
+        <SimpleModal 
+          open={open}
+          onclose={handleClose}
+        />
       </div>
     </>
   )
