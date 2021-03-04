@@ -62,7 +62,7 @@ const Menu = () => {
   const createOrder = (input, cartItems) => {
     dispatch(postOrder(input, cartItems));
     setOpen(false);
-    history.push('/');
+    history.push('/bye');
   }
 
   return (
