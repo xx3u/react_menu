@@ -32,7 +32,7 @@ const cartReducer = (state = initialState, action) => {
           [action.item]: state.cartItems[action.item] + 1
         },
         order: true,
-        totalPrice: state.totalPrice + action.price
+        totalPrice: state.totalPrice + parseFloat(action.price)
       };
     case REMOVE_FROM_CART:
       return {
